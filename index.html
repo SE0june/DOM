@@ -74,7 +74,7 @@ button{font-family:inherit}
 .nav-btn:focus-visible{outline:3px solid var(--volt);outline-offset:3px}
 .nav-btn.primary{background:var(--rust);border-color:transparent;box-shadow:0 5px 0 var(--rust-deep)}
 .nav-btn.primary:hover{background:#ff6370}
-.nb-t{display:block;font-family:var(--f-display);font-size:26px;line-height:1.05}
+.nb-t{display:block;font-family:var(--f-display);font-size:26px;line-height:1.05;white-space:nowrap;flex-shrink:0}
 .nav-btn:not(.primary) .nb-t{font-size:20px}
 .nb-s{display:block;font-size:12.5px;color:rgba(245,247,251,.75);margin-top:4px}
 .nb-s b{color:var(--bone)}
@@ -297,6 +297,56 @@ kbd{font-family:var(--f-num);font-weight:700;font-size:12px;background:#1c2436;b
 @keyframes ready{50%{box-shadow:inset 0 2px 0 var(--c),0 0 20px var(--c)}}
 #countdown{position:absolute;left:0;right:0;top:44%;text-align:center;font-family:var(--f-display);font-size:120px;color:var(--bone);text-shadow:0 6px 0 var(--rust-deep)}
 
+/* profile chip */
+#profileChip{position:fixed;top:max(16px,env(safe-area-inset-top,0px));right:18px;z-index:12;display:flex;align-items:center;gap:10px;padding:7px 14px 7px 7px;border-radius:30px;background:rgba(14,19,32,.8);border:1px solid var(--panel-line);color:var(--bone);cursor:pointer}
+#profileChip:hover{border-color:rgba(160,190,255,.5)}
+#profileChip:focus-visible{outline:3px solid var(--volt);outline-offset:3px}
+.pf-pic{width:36px;height:36px;border-radius:50%;background:#1a2133 center/cover no-repeat;border:1px solid var(--panel-line)}
+.pf-txt{display:flex;flex-direction:column;text-align:left}
+.pf-name{font-weight:800;font-size:14px}.pf-sub{font-size:11px;color:var(--mute)}
+/* modals */
+.modal{position:fixed;inset:0;z-index:40;display:grid;place-items:center;background:rgba(5,8,16,.6);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);padding:16px}
+.modal-card{width:min(400px,100%);background:#10162a;border:1px solid var(--panel-line);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.modal-card h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:26px}
+.modal-card p{margin:0;color:var(--mute);font-size:13.5px;line-height:1.5}
+.modal-card input{font-family:var(--f-num);font-size:26px;font-weight:700;letter-spacing:.2em;text-align:center;padding:12px;border-radius:6px;border:1px solid var(--panel-line);background:#0a0f1d;color:var(--bone);width:100%}
+#nameInput{letter-spacing:0;font-family:var(--f-body);font-size:20px}
+.modal-card input:focus{outline:2px solid var(--volt);outline-offset:1px}
+.modal-err{color:#ff8a8a!important;min-height:1.2em}
+.modal-card .row{display:flex;gap:10px;justify-content:flex-end}
+/* room */
+.room-code{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--panel-line);border-radius:6px;padding:6px 8px 6px 14px}
+.room-code span{font-size:12px;color:var(--mute)}
+.room-code b{font-family:var(--f-num);font-size:26px;letter-spacing:.18em;color:#ffe08a}
+.room-status{margin-left:auto;font-size:13px;color:var(--mute)}
+.room-layout{flex:1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;padding-top:18px;align-items:start;max-width:1200px;width:100%;margin:0 auto}
+.room-players,.room-settings{background:var(--panel);border:1px solid var(--panel-line);border-radius:8px;padding:16px 18px}
+.room-players h4,.rs-row h4{margin:0 0 10px;font-family:var(--f-display);font-weight:400;font-size:18px;color:var(--sand)}
+.room-players h4 small{font-family:var(--f-num);font-size:12px;color:var(--mute)}
+#roomTeams{display:grid;gap:12px}
+#roomTeams.two{grid-template-columns:1fr 1fr}
+.rt-col h5{margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.05em}
+.rt-col.b h5{color:#8cc0ff}.rt-col.r h5{color:#ff9aa3}
+.pl{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid transparent;margin-bottom:6px;width:100%;color:var(--bone);text-align:left;font:inherit}
+button.pl{cursor:pointer}button.pl:hover{border-color:rgba(160,190,255,.4)}
+.pl .pp{width:30px;height:30px;border-radius:50%;background:#1a2133 center/cover no-repeat;flex:none}
+.pl .pn{font-weight:800;font-size:14px}.pl .pr{font-size:11.5px;color:var(--mute)}
+.pl .tag{margin-left:auto;font-size:11px;font-weight:800;padding:2px 7px;border-radius:3px;background:rgba(255,224,138,.15);color:#ffe08a}
+.pl.ai{opacity:.7}.pl.me .pn::after{content:" (나)";color:var(--volt);font-weight:700}
+.room-hint{margin:8px 0 0;font-size:12.5px;color:var(--mute)}
+.rs-row{margin-bottom:16px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{padding:8px 12px;border-radius:5px;border:1px solid var(--panel-line);background:rgba(255,255,255,.04);color:var(--bone);font:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+.seg button.on{border-color:var(--volt);background:rgba(79,216,255,.14);color:#dff8ff}
+.seg button:disabled{cursor:default;opacity:.55}.seg button.on:disabled{opacity:1}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper button{width:36px;height:36px;border-radius:6px;border:1px solid var(--panel-line);background:rgba(255,255,255,.05);color:var(--bone);font-size:20px;cursor:pointer}
+.stepper button:disabled{opacity:.4;cursor:default}
+.stepper b{font-family:var(--f-num);font-size:24px;min-width:28px;text-align:center}
+.stepper small{color:var(--mute);font-size:12px}
+.room-note{margin:0;font-size:12.5px;color:var(--mute);line-height:1.5}
+@media (max-width:860px){.room-layout{grid-template-columns:1fr}#roomTeams.two{grid-template-columns:1fr}}
+
 /* result: character on the left over the map, stats on the right */
 #scrResult{background:linear-gradient(270deg,rgba(8,11,20,.88) 0%,rgba(8,11,20,.55) 38%,rgba(8,11,20,0) 62%);justify-content:space-between}
 .res-wrap{flex:1;display:flex;justify-content:flex-end;align-items:center;padding:0 clamp(0px,4vw,60px)}
@@ -371,7 +421,9 @@ kbd{font-family:var(--f-num);font-weight:700;font-size:12px;background:#1c2436;b
     <h1 class="logo">DOM</h1>
     <p class="logo-sub"><b>D</b>ecider <b>O</b>f the <b>M</b>atch</p>
     <nav class="main-nav" aria-label="메인 메뉴">
-      <button class="nav-btn primary" id="btnPlay"><span class="nb-t">플레이</span><span class="nb-s">모드와 맵을 골라 바로 시작해요</span></button>
+      <button class="nav-btn primary" id="btnHost"><span class="nb-t">방 만들기</span><span class="nb-s">코드를 친구에게 알려주고 함께 플레이해요</span></button>
+      <button class="nav-btn" id="btnJoin"><span class="nb-t">방 참여하기</span><span class="nb-s">친구에게 받은 6자리 코드를 입력해요</span></button>
+      <button class="nav-btn" id="btnPlay"><span class="nb-t">AI 대전</span><span class="nb-s">AI와 바로 한 판 해요</span></button>
       <button class="nav-btn" id="btnChars"><span class="nb-pic" id="navPic"></span><span><span class="nb-t">캐릭터</span><span class="nb-s">지금 고른 캐릭터 · <b id="navChar">볼터</b></span></span></button>
     </nav>
     <p class="hint">키보드와 마우스로 플레이해요</p>
@@ -479,6 +531,51 @@ kbd{font-family:var(--f-num);font-weight:700;font-size:12px;background:#1c2436;b
   <footer class="menu-foot"><button class="btn btn-main" id="mapGo">출격</button></footer>
 </section>
 
+<button id="profileChip" hidden aria-label="프로필"><span class="pf-pic" id="pfPic"></span><span class="pf-txt"><span class="pf-name" id="pfName">플레이어</span><span class="pf-sub" id="pfSub">닉네임 바꾸기</span></span></button>
+
+<section class="screen" id="scrRoom" hidden>
+  <header class="menu-head">
+    <button class="btn-back" id="roomBack">나가기</button>
+    <h2>방</h2>
+    <div class="room-code"><span>방 코드</span><b id="roomCode">------</b><button class="btn-back" id="roomCopy">복사</button></div>
+    <span class="room-status" id="roomStatus"></span>
+  </header>
+  <div class="room-layout">
+    <section class="room-players">
+      <h4>참가자 <small id="roomCount"></small></h4>
+      <div id="roomTeams"></div>
+      <p class="room-hint" id="roomHint"></p>
+    </section>
+    <section class="room-settings">
+      <div class="rs-row"><h4>모드</h4><div class="seg" id="rsMode"></div></div>
+      <div class="rs-row"><h4>맵</h4><div class="seg" id="rsMap"></div></div>
+      <div class="rs-row"><h4>AI 수</h4><div class="stepper"><button id="aiMinus" aria-label="AI 줄이기">−</button><b id="aiNum">0</b><button id="aiPlus" aria-label="AI 늘리기">+</button><small id="aiMax"></small></div></div>
+      <div class="rs-row"><h4>내 캐릭터</h4><div class="seg" id="rsChar"></div></div>
+      <p class="room-note" id="roomNote"></p>
+    </section>
+  </div>
+  <footer class="menu-foot"><button class="btn btn-main" id="roomStart">시작하기</button></footer>
+</section>
+
+<div class="modal" id="joinModal" hidden role="dialog" aria-modal="true" aria-labelledby="joinTitle">
+  <div class="modal-card">
+    <h3 id="joinTitle">방 참여하기</h3>
+    <p>친구에게 받은 6자리 방 코드를 입력하세요.</p>
+    <input id="joinInput" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="000000" aria-label="방 코드">
+    <p class="modal-err" id="joinErr"></p>
+    <div class="row"><button class="btn" id="joinCancel">취소</button><button class="btn btn-main" id="joinGo">참여</button></div>
+  </div>
+</div>
+<div class="modal" id="nameModal" hidden role="dialog" aria-modal="true" aria-labelledby="nameTitle">
+  <div class="modal-card">
+    <h3 id="nameTitle">프로필</h3>
+    <p>다른 플레이어에게 보이는 닉네임이에요. 최대 12자.</p>
+    <input id="nameInput" maxlength="12" autocomplete="off" aria-label="닉네임">
+    <p class="modal-err" id="nameErr"></p>
+    <div class="row"><button class="btn" id="nameCancel">취소</button><button class="btn btn-main" id="nameSave">저장</button></div>
+  </div>
+</div>
+
 <div id="hud" hidden>
   <div id="killfeed"></div>
   <div id="topbar">
@@ -525,7 +622,7 @@ kbd{font-family:var(--f-num);font-weight:700;font-size:12px;background:#1c2436;b
       <div class="res-rank" id="resRank">#1<small> / 12</small></div>
       <h2 class="res-title" id="resTitle">최후의 생존자</h2>
       <p class="res-sub" id="resSub"></p>
-      <dl class="res-meta"><dt>캐릭터</dt><dd id="resChar">볼터</dd><dt>모드</dt><dd id="resMode">서바이벌</dd><dt>맵</dt><dd id="resMap">붉은 협곡 마을</dd></dl>
+      <dl class="res-meta"><dt>캐릭터</dt><dd id="resChar">볼터</dd><dt>모드</dt><dd id="resMode">서바이벌</dd><dt>맵</dt><dd id="resMap">붉은 협곡 마을</dd><dt>통산 전적</dt><dd id="resCareer">-</dd></dl>
       <div class="res-stats">
         <div><b id="resKills">0</b><span>처치</span></div>
         <div><b id="resDmg">0</b><span>입힌 피해</span></div>
@@ -4016,6 +4113,7 @@ function hasLOS(a, b) {
 
 /* ---------- damage ---------- */
 function damage(target, amt, src, opts) {
+  if (NET.role === 'client') return;
   if (!target.alive || sameTeam(target, src) || G.roundOver) return;
   opts = opts || {};
   amt = Math.round(amt * 10) / 10;
@@ -4025,17 +4123,19 @@ function damage(target, amt, src, opts) {
   if (target.brain) target.brain.onHurt(src);
   if (src && src.isPlayer && target !== src) { UI.damageNumber(target, amt, opts.big); UI.hitmarker(false); target.showHpT = 4; Sfx.play('hit', 0.8); }
   if (target.isPlayer) UI.hurt(src, amt);
+  if (NET.role === 'host') netEv({ k: 'dmg', t: target.id, s: src ? src.id : -1, a: amt, b: opts.big ? 1 : 0 });
   if (target.hp <= 0) kill(target, src, opts.cause);
 }
 function kill(f, src, cause) {
   f.hp = 0; f.alive = false; f.deadT = 0; f.deaths = (f.deaths || 0) + 1; f.deathT = G.time; f.place = G.fighters.filter(x => x.alive).length + 1;
   f.rT = 0; f.slide = 0; f.dash = 0; f.eHold = false; f.firing = false; f.qT = 0; f.tele = null;
   if (src && src !== f) src.kills++;
-  UI.killfeed(src, f, cause);
+  UI.killfeed(src, f, cause); netEv({ k: 'kill', v: f.id, s: src ? src.id : -1, c: cause || '' });
   if (src && src.isPlayer && src !== f) { UI.hitmarker(true); Sfx.play('kill'); UI.announce('처치!', f.name + ' 탈락'); }
   G.sparks.burst(f.chest(new V3()), 30, 0xfff3a8, 6, 0.6, 0.35, 4);
   if (isTeam()) { teamOnKill(f, src); return; }
   const alive = G.fighters.filter(x => x.alive);
+  if (NET.role === 'host') { if (f.isPlayer) { G.deathBy = cause === 'storm' ? null : src; G.deathCause = cause; } if (alive.length <= 1) netSurvivalEnd(alive[0]); return; }
   if (f.isPlayer) { G.deathBy = cause === 'storm' ? null : src; G.deathCause = cause; endGame(false); }
   else if (alive.length === 1 && alive[0].isPlayer) { G.player.place = 1; endGame(true); }
 }
@@ -4048,7 +4148,8 @@ function handPos(f, out) {
   return f.eyePos(out);
 }
 function aimDir(f, out) {
-  if (f.isPlayer) return f.forward(out);
+  if (f.netAim && NET.role === 'client') return out.copy(f.netAim);
+  if (f.isPlayer || !f.brain) return f.forward(out);
   return f.brain.aimDir(out);
 }
 // sky-to-ground bolt with flash, ring and light
@@ -4121,14 +4222,15 @@ function tryUlt(f) {
   return true;
 }
 function throwOrb(f, vel) {
-  if (f.cd.e > 0 || !f.alive || f.flag) { f.eHold = false; return; }
+  if (f.cd.e > 0 || !f.alive || f.flag) { f.eHold = false; return false; }
   f.lastAtkT = G.time; f.cd.e = VOLTER.e.cd; f.eHold = false; f.throwT = 0.35; if (f.isPlayer) G.vm.throwK = 1;
   const start = f.isPlayer ? G.vm.L.tip.getWorldPosition(new V3()) : f.model.armL.tip.getWorldPosition(new V3());
   const mesh = makeOrbMesh(0.13); mesh.position.copy(start); G.scene.add(mesh);
   G.orbs.push({ pos: start.clone(), vel: vel.clone(), owner: f, mesh, t: 0 });
   G.flash.flash(start, 1.0, 0.1); Sfx.at('throw', start);
 }
-function playerThrowVel(out) { const f = G.player; f.forward(out).multiplyScalar(VOLTER.e.speed); out.y += 3.2; return out; }
+function throwVelFor(f, out) { out = out || new V3(); f.forward(out).multiplyScalar(VOLTER.e.speed); out.y += 3.2; return out; }
+function playerThrowVel(out) { return throwVelFor(G.player, out); }
 // simulate orb flight → landing point
 function orbStep(pos, vel, dt, owner) {
   const np = _o.copy(pos).addScaledVector(vel, dt);
@@ -4358,12 +4460,14 @@ function tickFighter(f, dt) {
   else f.stormTick = 0.5;
   // pickups
   for (const pk of G.pickups) {
+    if (NET.role === 'client') break;
     if (!pk.active || f.hp >= f.maxHp) continue;
     const dx = pk.x - f.pos.x, dz = pk.z - f.pos.z;
     if (dx * dx + dz * dz < 1.9 && Math.abs(pk.y - f.pos.y) < 1.5) {
       pk.active = false; pk.mesh.visible = false; f.hp = Math.min(f.maxHp, f.hp + 60);
       G.sparks.burst(new V3(pk.x, pk.y + 0.8, pk.z), 16, 0x86e07a, 3, 0.6, 0.25, -2);
       if (f.isPlayer) { Sfx.play('pickup'); UI.announce('', '물통 · 체력 +60', 1.2); }
+      netEv({ k: 'pk', id: f.id });
     }
   }
 }
@@ -5131,17 +5235,17 @@ function ctfUpdate(dt) {
     if (fl.state === 'captured') { fl.mesh.visible = false; continue; }
     if (fl.state === 'carried') {
       const c = fl.carrier;
-      if (!c || !c.alive) { if (c) ctfDrop(c); continue; }
+      if (!c || !c.alive) { if (c && NET.role !== 'client') ctfDrop(c); continue; }
       const bx = Math.sin(c.yaw) * 0.35, bz = Math.cos(c.yaw) * 0.35;
       fl.pos.set(c.pos.x + bx, c.pos.y + 0.55, c.pos.z + bz);
       fl.mesh.position.copy(fl.pos); fl.mesh.rotation.y = c.yaw; fl.mesh.scale.setScalar(0.7);
       fl.mesh.visible = !(c.isPlayer && c.alive);
       // win: carry the enemy flag into your own base
       const bs = World.bases[c.team];
-      if (!G.over && !G.roundOver && Math.hypot(c.pos.x - bs.x, c.pos.z - bs.z) < bs.r) ctfCapture(c, fl);
+      if (NET.role !== 'client' && !G.over && !G.roundOver && Math.hypot(c.pos.x - bs.x, c.pos.z - bs.z) < bs.r) ctfCapture(c, fl);
     } else {
       fl.mesh.visible = true; fl.mesh.scale.setScalar(1); fl.mesh.position.copy(fl.pos); fl.mesh.rotation.y += dt * 0.6;
-      if (fl.state === 'dropped') { fl.dropT -= dt; if (fl.dropT <= 0) ctfReturn(fl); }
+      if (fl.state === 'dropped') { fl.dropT -= dt; if (fl.dropT <= 0 && NET.role !== 'client') ctfReturn(fl); }
     }
     // effects
     const t = G.time;
@@ -5192,6 +5296,7 @@ function teamOnKill(f, src) {
 }
 function teamWin(team, why) {
   if (G.over) return;
+  if (NET.role === 'host') netEv({ k: 'end', team, score: G.score.slice() });
   const win = team === G.player.team;
   G.teamResult = { win, why, team };
   endGame(win);
@@ -5298,7 +5403,7 @@ function teamGoal(f, b) {
 }
 function teamAssignRoles() {
   for (const t of [0, 1]) {
-    const ai = G.fighters.filter(f => f.team === t && !f.isPlayer);
+    const ai = G.fighters.filter(f => f.team === t && !f.isPlayer && f.brain);
     ai.forEach((f, i) => { f.brain.role = (t === G.player.team ? (i === 0 ? 'attack' : 'defend') : (i < 2 ? 'attack' : 'defend')); });
   }
 }
@@ -5593,6 +5698,529 @@ function updateHydroVM(p, vm, dt) {
   vm.root.updateMatrixWorld(true);
 }
 /* =========================================================
+   Online rooms: nickname/profile, create/join by 6-digit code, host-run lobby,
+   host-authoritative match with input upload + state snapshots + event replication.
+   Transport: Firebase Realtime Database holds the room (code, presence, signalling).
+   Game traffic goes over a direct WebRTC data channel between host and each player;
+   if that can't open (strict networks), it falls back to relaying through the database.
+   ========================================================= */
+const NET = { role: 'off', code: '', myPid: '', tr: null, lobby: null, setup: null, waiting: false, ready: new Set(), inputs: new Map(), events: [], snapT: 0, inT: 0, pend: {}, snaps: [], last: null, prevMeta: null };
+const NET_MAX = { survival: 12, ctf: 6, tsv: 6 };
+const FB_CONFIG = {
+  apiKey: 'AIzaSyCBuFQZhO1neCIphOyLPlUX-iq9nuskVxM',
+  authDomain: 'decider-of-the-match.firebaseapp.com',
+  databaseURL: 'https://decider-of-the-match-default-rtdb.asia-southeast1.firebasedatabase.app',
+  projectId: 'decider-of-the-match',
+  storageBucket: 'decider-of-the-match.firebasestorage.app',
+  messagingSenderId: '626967042711',
+  appId: '1:626967042711:web:a6e4cc700c77d9fd7de7d2'
+};
+const FB_VER = '10.12.2';
+const ICE = { iceServers: [{ urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302'] }, { urls: 'stun:stun.cloudflare.com:3478' }] };
+const FORCE_RELAY = /[?&]relay=1/.test(location.search);
+
+/* ---------- firebase loader ---------- */
+let _fb = null;
+function loadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
+function fbDB() {
+  if (_fb) return _fb;
+  const bases = [`https://cdn.jsdelivr.net/npm/firebase@${FB_VER}/`, `https://unpkg.com/firebase@${FB_VER}/`, `https://www.gstatic.com/firebasejs/${FB_VER}/`];
+  _fb = (async () => {
+    if (!(window.firebase && window.firebase.database)) {
+      let ok = false;
+      for (const b of bases) {
+        try { if (!window.firebase) await loadScript(b + 'firebase-app-compat.js'); await loadScript(b + 'firebase-database-compat.js'); ok = !!(window.firebase && firebase.database); if (ok) break; } catch (e) { }
+      }
+      if (!ok) throw new Error('lib');
+    }
+    if (!firebase.apps.length) firebase.initializeApp(FB_CONFIG);
+    return firebase.database();
+  })();
+  _fb.catch(() => { _fb = null; });
+  return _fb;
+}
+const rid = () => Math.random().toString(36).slice(2, 10);
+
+/* one host↔player link: data channel when open, database relay otherwise */
+function makeLink(db, base, outPath, inPath, initiator, onMsg) {
+  const L = { dc: null, pc: null, relay: true, closed: false, q: null, qT: 0, refs: [] };
+  const outRef = db.ref(base + '/relay/' + outPath), sigOut = db.ref(base + '/sig/' + (initiator ? 'c2h' : 'h2c'));
+  const inRef = db.ref(base + '/relay/' + inPath), sigIn = db.ref(base + '/sig/' + (initiator ? 'h2c' : 'c2h'));
+  const recv = (txt) => { if (L.closed) return; let m; try { m = JSON.parse(txt); } catch (e) { return; } onMsg(m); };
+  const onRelay = (s) => { const v = s.val(); s.ref.remove(); if (v && v.d) recv(v.d); };
+  inRef.on('child_added', onRelay); L.refs.push([inRef, 'child_added', onRelay]);
+  // relay throttle: merge snapshots / inputs so the database sees ~10–15 writes a second at most
+  const flush = () => { L.qT = 0; if (!L.q || L.closed) return; const m = L.q; L.q = null; outRef.push({ d: JSON.stringify(m) }); };
+  L.send = (m) => {
+    if (L.closed) return;
+    if (!L.relay && L.dc && L.dc.readyState === 'open') {
+      if ((m.t === 'snap' || m.t === 'in') && L.dc.bufferedAmount > 262144) { if (m.t === 'snap' && m.E && m.E.length) L.carryE = (L.carryE || []).concat(m.E); return; }
+      if (m.t === 'snap' && L.carryE) { m = Object.assign({}, m, { E: L.carryE.concat(m.E || []) }); L.carryE = null; }
+      try { L.dc.send(JSON.stringify(m)); } catch (e) { } return;
+    }
+    if (m.t === 'snap' || m.t === 'in') {
+      if (L.q && L.q.t === m.t) {
+        if (m.t === 'snap') m = Object.assign({}, m, { E: (L.q.E || []).concat(m.E || []) });
+        else { const P = L.q; m = Object.assign({}, m); for (const k of ['j', 'sl', 'm0', 'q', 'e', 'r', 'eu']) if (P[k]) m[k] = true; }
+      } else if (L.q) flush();
+      L.q = m; if (!L.qT) L.qT = setTimeout(flush, m.t === 'snap' ? 100 : 66);
+      return;
+    }
+    if (L.q) flush();
+    outRef.push({ d: JSON.stringify(m) });
+  };
+  L.close = () => { L.closed = true; for (const [r, e, f] of L.refs) r.off(e, f); try { L.dc && L.dc.close(); } catch (e) { } try { L.pc && L.pc.close(); } catch (e) { } };
+  // WebRTC upgrade
+  if (!FORCE_RELAY && window.RTCPeerConnection) {
+    try {
+      const pc = new RTCPeerConnection(ICE); L.pc = pc;
+      const sig = (o) => { if (!L.closed) sigOut.push({ d: JSON.stringify(o) }); };
+      const useDC = (dc) => { L.dc = dc; dc.onopen = () => { if (!L.closed) { if (L.q) flush(); L.relay = false; } }; dc.onclose = () => { L.relay = true; }; dc.onmessage = (e) => recv(e.data); };
+      pc.onicecandidate = (e) => { if (e.candidate) sig({ c: e.candidate.toJSON ? e.candidate.toJSON() : e.candidate }); };
+      pc.onconnectionstatechange = () => { if (pc.connectionState === 'failed') L.relay = true; };
+      if (initiator) useDC(pc.createDataChannel('g', { ordered: true })); else pc.ondatachannel = (e) => useDC(e.channel);
+      const pendC = [];
+      const onSig = async (s) => {
+        const v = s.val(); s.ref.remove(); if (!v || L.closed) return; let o; try { o = JSON.parse(v.d); } catch (e) { return; }
+        try {
+          if (o.sdp) {
+            await pc.setRemoteDescription(o.sdp);
+            while (pendC.length) await pc.addIceCandidate(pendC.shift()).catch(() => { });
+            if (o.sdp.type === 'offer') { const a = await pc.createAnswer(); await pc.setLocalDescription(a); sig({ sdp: { type: a.type, sdp: a.sdp } }); }
+          } else if (o.c) { if (pc.remoteDescription) await pc.addIceCandidate(o.c).catch(() => { }); else pendC.push(o.c); }
+        } catch (e) { }
+      };
+      sigIn.on('child_added', onSig); L.refs.push([sigIn, 'child_added', onSig]);
+      if (initiator) pc.createOffer().then((o) => pc.setLocalDescription(o).then(() => sig({ sdp: { type: o.type, sdp: o.sdp } }))).catch(() => { });
+    } catch (e) { }
+  }
+  return L;
+}
+
+// common shape: host → { onJoin(pid), onMsg(pid,m), onLeave(pid), send(pid,m), all(m), close() }
+//               client → { onMsg(m), onClose(why), send(m), close() }
+function hostTransport(code, cb) {
+  fbDB().then((db) => {
+    const base = 'dom/rooms/' + code, room = db.ref(base), meta = db.ref(base + '/meta');
+    meta.transaction((cur) => cur ? undefined : { t: firebase.database.ServerValue.TIMESTAMP, v: 1 }, (err, committed) => {
+      if (err) { cb('error'); return; }
+      if (!committed) { cb('unavailable-id'); return; }
+      room.onDisconnect().remove();
+      const links = new Map(), T = { links }, peers = db.ref(base + '/peers');
+      T.send = (pid, m) => { const l = links.get(pid); if (l) l.send(m); };
+      T.all = (m) => { for (const l of links.values()) l.send(m); };
+      const onAdd = (s) => {
+        const pid = s.key; if (links.has(pid)) return;
+        links.set(pid, makeLink(db, base + '/p/' + pid, 'dn', 'up', false, (m) => { T.onMsg(pid, m); }));
+      };
+      const onRem = (s) => {
+        const pid = s.key, l = links.get(pid); if (!l) return;
+        l.close(); links.delete(pid); db.ref(base + '/p/' + pid).remove(); T.onLeave(pid);
+      };
+      peers.on('child_added', onAdd); peers.on('child_removed', onRem);
+      T.close = () => { peers.off('child_added', onAdd); peers.off('child_removed', onRem); for (const l of links.values()) l.close(); links.clear(); room.remove(); room.onDisconnect().cancel(); };
+      cb(null, T);
+    }, false);
+  }).catch(() => cb('lib'));
+}
+function clientTransport(code, cb) {
+  fbDB().then((db) => {
+    const base = 'dom/rooms/' + code, meta = db.ref(base + '/meta');
+    meta.once('value').then((s) => {
+      if (!s.exists()) { cb('nohost'); return; }
+      const me = 'P' + rid(), pbase = base + '/p/' + me, presence = db.ref(base + '/peers/' + me);
+      const T = { me }; let alive = false, gone = false;
+      presence.onDisconnect().remove(); db.ref(pbase).onDisconnect().remove();
+      const link = makeLink(db, pbase, 'up', 'dn', true, (m) => {
+        if (m.t === 'welcome') alive = true;
+        if (m.t === 'closed') { end('closed'); return; }
+        T.onMsg && T.onMsg(m);
+      });
+      const end = (why) => { if (gone) return; gone = true; meta.off('value', onMeta); link.close(); presence.remove(); db.ref(pbase).remove(); T.onClose && T.onClose(why); };
+      const onMeta = (s2) => { if (!s2.exists()) end(alive ? 'closed' : 'nohost'); };
+      T.send = (m) => link.send(m);
+      T.close = () => { if (gone) return; gone = true; meta.off('value', onMeta); link.close(); presence.onDisconnect().cancel(); presence.remove(); db.ref(pbase).remove(); };
+      presence.set({ t: firebase.database.ServerValue.TIMESTAMP }).then(() => {
+        meta.on('value', onMeta);
+        cb(null, T);
+        setTimeout(() => { if (!alive) end('nohost'); }, 9000);
+      }).catch(() => cb('error'));
+    }).catch(() => cb('error'));
+  }).catch(() => cb('lib'));
+}
+
+/* ---------- profile / nickname ---------- */
+function myName() { return Save.d.name || '플레이어'; }
+function profileUI() {
+  $('pfName').textContent = myName();
+  if (PORTRAIT[selChar]) $('pfPic').style.backgroundImage = `url(${PORTRAIT[selChar]})`;
+}
+function openNameModal() {
+  $('nameInput').value = myName(); $('nameErr').textContent = ''; $('nameModal').hidden = false; setTimeout(() => $('nameInput').select(), 30);
+}
+function saveName() {
+  const v = $('nameInput').value.trim().replace(/\s+/g, ' ');
+  if (v.length < 2) { $('nameErr').textContent = '2자 이상 입력해 주세요.'; return; }
+  if (v.length > 12) { $('nameErr').textContent = '12자까지 쓸 수 있어요.'; return; }
+  Save.set('name', v); $('nameModal').hidden = true; profileUI();
+  if (NET.role === 'client') NET.tr.send({ t: 'me', name: v, ch: selChar });
+  if (NET.role === 'host') { const me = NET.lobby.players.find(p => p.pid === 'H'); if (me) me.name = v; lobbyChanged(); }
+}
+
+/* ---------- lobby (host owns the state) ---------- */
+function newLobby() {
+  const mode = selMode, map = (MAPS[MAP_ID].modes || []).includes(mode) ? MAP_ID : Object.keys(MAPS).find(k => (MAPS[k].modes || []).includes(mode));
+  return { players: [{ pid: 'H', name: myName(), ch: selChar, team: 0 }], mode, map, ai: MODES[mode].team ? 5 : 11, started: false };
+}
+function lobbyFix(L) {
+  const max = NET_MAX[L.mode], hum = L.players.length;
+  L.ai = clamp(L.ai, 0, Math.max(0, max - hum));
+  if (MODES[L.mode].team) {
+    // keep each team at most 3 humans; move extras
+    for (const t of [0, 1]) { const on = L.players.filter(p => p.team === t); while (on.length > 3) on.pop().team = 1 - t; }
+  }
+  if (!(MAPS[L.map].modes || []).includes(L.mode)) L.map = Object.keys(MAPS).find(k => (MAPS[k].modes || []).includes(L.mode));
+}
+function lobbyChanged() {
+  if (NET.role !== 'host') return;
+  lobbyFix(NET.lobby); NET.tr.all({ t: 'lobby', L: NET.lobby }); roomUI();
+}
+function hostMsg(pid, m) {
+  const L = NET.lobby;
+  if (m.t === 'hello') {
+    if (L.started || L.players.length >= NET_MAX[L.mode]) { NET.tr.send(pid, { t: 'deny', why: L.started ? 'started' : 'full' }); return; }
+    if (!L.players.some(p => p.pid === pid)) {
+      const t0 = L.players.filter(p => p.team === 0).length, t1 = L.players.filter(p => p.team === 1).length;
+      L.players.push({ pid, name: String(m.name || '플레이어').slice(0, 12), ch: CHARS[m.ch] ? m.ch : 'volter', team: t0 <= t1 ? 0 : 1 });
+      if (L.ai > NET_MAX[L.mode] - L.players.length) L.ai--;
+    }
+    NET.tr.send(pid, { t: 'welcome', pid }); lobbyChanged();
+    UI.notice && UI.notice(`${m.name}님이 들어왔어요`, 2);
+  } else if (m.t === 'me') {
+    const p = L.players.find(p => p.pid === pid); if (p) { if (m.name) p.name = String(m.name).slice(0, 12); if (CHARS[m.ch]) p.ch = m.ch; lobbyChanged(); }
+  } else if (m.t === 'in') {
+    const f = G.fighters.find(f => f.owner === pid); if (!f) return;
+    const P = NET.inputs.get(f.id) || {};
+    // keep one-shot presses until the host consumes them
+    NET.inputs.set(f.id, Object.assign({}, m, { j: P.j || m.j, sl: P.sl || m.sl, m0: P.m0 || m.m0, q: P.q || m.q, e: P.e || m.e, r: P.r || m.r, eu: P.eu || m.eu }));
+  } else if (m.t === 'ready') { NET.ready.add(pid); }
+}
+function hostLeave(pid) {
+  const L = NET.lobby; if (!L) return;
+  const p = L.players.find(p => p.pid === pid); if (!p) return;
+  L.players = L.players.filter(q => q.pid !== pid);
+  NET.ready.delete(pid);
+  // mid-match: the leaver's agent is taken over by an AI so the match can go on
+  const f = G.fighters.find(f => f.owner === pid);
+  if (f && state === 'game') { f.remote = false; f.owner = null; f.brain = new Brain(f); f.brain.lastPos.copy(f.pos); f.name = f.name + ' (AI)'; if (isTeam()) teamAssignRoles(); }
+  UI.notice && UI.notice(`${p.name}님이 나갔어요`, 2);
+  lobbyChanged();
+}
+
+/* ---------- create / join / leave ---------- */
+function makeCode() { return String(Math.floor(100000 + Math.random() * 900000)); }
+function netHost() {
+  netReset(); const code = makeCode(); $('roomStatus').textContent = '방을 여는 중…';
+  NET.role = 'host'; NET.code = code; NET.myPid = 'H'; NET.lobby = newLobby();
+  showScreen('room'); roomUI();
+  hostTransport(code, (err, T) => {
+    if (err) { if (err === 'unavailable-id') { NET.role = 'off'; netHost(); return; } NET.role = 'off'; showScreen('title'); UI.notice(err === 'lib' ? '온라인 기능을 불러오지 못했어요. 인터넷 연결을 확인해 주세요.' : '방을 만들지 못했어요. 잠시 뒤 다시 시도해 주세요.', 4); return; }
+    NET.tr = T; T.onJoin = () => { }; T.onMsg = hostMsg; T.onLeave = hostLeave;
+    $('roomStatus').textContent = '친구를 기다리는 중'; roomUI();
+  });
+}
+function netJoin(code) {
+  if (!/^\d{6}$/.test(code)) { $('joinErr').textContent = '숫자 6자리를 입력해 주세요.'; return; }
+  netReset(); $('joinErr').textContent = ''; $('joinGo').disabled = true; $('joinGo').textContent = '연결 중…';
+  clientTransport(code, (err, T) => {
+    $('joinGo').disabled = false; $('joinGo').textContent = '참여';
+    if (err) { $('joinErr').textContent = err === 'lib' ? '온라인 기능을 불러오지 못했어요.' : err === 'nohost' ? '그 코드의 방을 찾지 못했어요.' : '연결하지 못했어요. 다시 시도해 주세요.'; return; }
+    NET.role = 'client'; NET.code = code; NET.tr = T; NET.myPid = T.me;
+    T.onMsg = clientMsg;
+    T.onClose = (why) => { if (NET.role !== 'client') return; const inGame = state === 'game' || state === 'result'; netReset(); if (inGame) { G.over = true; exitLock(); clearMatch(); } $('joinModal').hidden = true; showScreen('title'); UI.notice(why === 'nohost' ? '그 코드의 방을 찾지 못했어요.' : '방이 닫혔어요.', 3.5); };
+    T.send({ t: 'hello', name: myName(), ch: selChar });
+  });
+}
+function netLeave(msg) {
+  if (NET.role === 'off') return;
+  try { NET.tr && NET.tr.close(); } catch (e) { }
+  netReset();
+  if (msg) UI.notice(msg, 2);
+}
+function netReset() { Object.assign(NET, { role: 'off', code: '', myPid: '', tr: null, lobby: null, setup: null, waiting: false, ready: new Set(), inputs: new Map(), events: [], snaps: [], last: null, prevMeta: null, pend: {} }); }
+window.addEventListener('beforeunload', () => { try { if (NET.tr) NET.tr.close(); } catch (e) { } });
+
+/* ---------- client messages ---------- */
+function clientMsg(m) {
+  if (m.t === 'welcome') { NET.myPid = m.pid; $('joinModal').hidden = true; showScreen('room'); }
+  else if (m.t === 'deny') { $('joinErr').textContent = m.why === 'full' ? '방이 가득 찼어요.' : '이미 경기가 시작된 방이에요.'; try { NET.tr.close(); } catch (e) { } netReset(); }
+  else if (m.t === 'lobby') { NET.lobby = m.L; if (state === 'room') roomUI(); }
+  else if (m.t === 'start') netBeginMatch(m.S);
+  else if (m.t === 'snap') { netApplySnap(m.S); if (m.E) for (const e of m.E) netApplyEvent(e); }
+  else if (m.t === 'room') { if (state === 'result' || state === 'game') { /* stay on result until the player presses next */ } }
+}
+
+/* ---------- room screen ---------- */
+function roomUI() {
+  const L = NET.lobby; if (!L) return;
+  const host = NET.role === 'host', team = !!MODES[L.mode].team, me = NET.myPid;
+  $('roomCode').textContent = NET.code || '------';
+  $('roomCount').textContent = `${L.players.length}명 · AI ${L.ai}명 · 최대 ${NET_MAX[L.mode]}명`;
+  const pic = (ch) => PORTRAIT[ch] ? `style="background-image:url(${PORTRAIT[ch]})"` : '';
+  const pl = (p) => `<${host && team && p.pid ? 'button' : 'div'} class="pl${p.pid === me ? ' me' : ''}${p.ai ? ' ai' : ''}" ${p.pid ? `data-pid="${p.pid}"` : ''}><span class="pp" ${p.ai ? '' : pic(p.ch)}></span><span><span class="pn">${escapeHTML(p.name)}</span><span class="pr" style="display:block">${p.ai ? 'AI · 무작위 캐릭터' : CHARS[p.ch].name}</span></span>${p.pid === 'H' ? '<span class="tag">방장</span>' : ''}</${host && team && p.pid ? 'button' : 'div'}>`;
+  const box = $('roomTeams');
+  if (team) {
+    const cols = [0, 1].map(t => { const hs = L.players.filter(p => p.team === t), aiN = Math.max(0, Math.min(3 - hs.length, L.ai - (t === 1 ? Math.max(0, Math.min(3 - L.players.filter(p => p.team === 0).length, L.ai)) : 0))); return { hs, aiN }; });
+    // AI fill: team 0 first up to 3, the rest to team 1
+    const a0 = Math.min(Math.max(0, 3 - cols[0].hs.length), L.ai), a1 = Math.min(Math.max(0, 3 - cols[1].hs.length), L.ai - a0);
+    const ai = [a0, a1];
+    box.className = 'two';
+    box.innerHTML = [0, 1].map(t => `<div class="rt-col ${t ? 'r' : 'b'}"><h5>${TEAM_NAME[t]}</h5>${cols[t].hs.map(pl).join('')}${Array.from({ length: ai[t] }, () => pl({ name: 'AI', ai: true })).join('')}</div>`).join('');
+  } else {
+    box.className = '';
+    box.innerHTML = L.players.map(pl).join('') + (L.ai ? pl({ name: `AI × ${L.ai}`, ai: true }) : '');
+  }
+  if (host && team) for (const el of box.querySelectorAll('button.pl')) el.onclick = () => { const p = L.players.find(q => q.pid === el.dataset.pid); if (!p) return; const other = 1 - p.team; if (L.players.filter(q => q.team === other).length >= 3) { UI.notice('그 팀은 이미 3명이에요', 1.6); return; } p.team = other; Sfx.play('ui'); lobbyChanged(); };
+  $('roomHint').textContent = team ? (host ? '참가자를 누르면 팀을 옮길 수 있어요. 빈 자리는 AI가 채워요.' : '팀 구성은 방장이 정해요.') : '모두 각자 싸우는 개인전이에요. 빈 자리는 AI가 채워요.';
+  // settings
+  const seg = (id, items, cur, fn) => { const el = $(id); el.innerHTML = items.map(([k, n]) => `<button data-k="${k}" class="${k === cur ? 'on' : ''}" ${host || id === 'rsChar' ? '' : 'disabled'}>${n}</button>`).join(''); for (const b of el.querySelectorAll('button')) b.onclick = () => { Sfx.play('ui'); fn(b.dataset.k); }; };
+  seg('rsMode', Object.values(MODES).map(m => [m.id, m.name]), L.mode, (k) => { L.mode = k; L.ai = MODES[k].team ? Math.max(0, 6 - L.players.length) : Math.max(0, 12 - L.players.length); lobbyChanged(); });
+  seg('rsMap', Object.keys(MAPS).filter(k => (MAPS[k].modes || []).includes(L.mode)).map(k => [k, MAPS[k].name]), L.map, (k) => { L.map = k; lobbyChanged(); });
+  const mine = L.players.find(p => p.pid === me);
+  seg('rsChar', CHAR_IDS.map(c => [c, CHARS[c].name]), mine ? mine.ch : selChar, (c) => { setShowChar(c); if (host) { const p = L.players.find(q => q.pid === 'H'); p.ch = c; lobbyChanged(); } else { NET.tr.send({ t: 'me', ch: c }); } });
+  const maxAI = Math.max(0, NET_MAX[L.mode] - L.players.length);
+  $('aiNum').textContent = L.ai; $('aiMax').textContent = `최대 ${maxAI}`;
+  $('aiMinus').disabled = !host || L.ai <= 0; $('aiPlus').disabled = !host || L.ai >= maxAI;
+  $('roomStart').hidden = !host; $('roomStart').disabled = !NET.tr;
+  $('roomNote').textContent = host ? '설정을 마치고 원할 때 시작하세요. 시작하면 새로 들어올 수 없어요.' : '방장이 설정을 바꾸고 시작할 때까지 기다려 주세요.';
+  if (!host) $('roomStatus').textContent = '방장을 기다리는 중';
+}
+function escapeHTML(s) { return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+/* ---------- starting a match ---------- */
+function netStartClicked() {
+  if (NET.role !== 'host' || !NET.tr) return;
+  const L = NET.lobby; lobbyFix(L);
+  const team = !!MODES[L.mode].team, roster = [], names = AI_NAMES.slice().sort(() => Math.random() - 0.5);
+  let id = 0;
+  if (team) {
+    const a0 = Math.min(Math.max(0, 3 - L.players.filter(p => p.team === 0).length), L.ai), ai = [a0, L.ai - a0];
+    for (const t of [0, 1]) {
+      for (const p of L.players.filter(p => p.team === t)) roster.push({ id: id++, name: p.name, ch: p.ch, team: t, owner: p.pid });
+      for (let k = 0; k < ai[t]; k++) roster.push({ id: id++, name: names.pop(), ch: CHAR_IDS[Math.floor(Math.random() * 3)], team: t, owner: null });
+    }
+  } else {
+    for (const p of L.players) roster.push({ id: id++, name: p.name, ch: p.ch, team: null, owner: p.pid });
+    for (let k = 0; k < L.ai; k++) roster.push({ id: id++, name: names.pop() || 'AI ' + k, ch: CHAR_IDS[Math.floor(Math.random() * 3)], team: null, owner: null });
+  }
+  const S = { mode: L.mode, map: L.map, roster };
+  L.started = true; NET.tr.all({ t: 'lobby', L }); NET.tr.all({ t: 'start', S });
+  netBeginMatch(S);
+}
+function netBeginMatch(S) {
+  NET.setup = S; NET.snaps = []; NET.last = null; NET.prevMeta = null; NET.events = [];
+  selMode = S.mode;
+  const go = () => {
+    if (NET.role === 'host') { NET.waiting = NET.lobby.players.length > 1; NET.ready.clear(); NET.waitT = 15; }
+    startGame();
+    if (NET.role === 'client') NET.tr.send({ t: 'ready' });
+  };
+  if (MAP_ID !== S.map) loadMap(S.map, go); else go();
+}
+// build fighters from the shared roster (called inside startGame / startTeamGame)
+function netCreateFighters(team) {
+  const S = NET.setup, slots = [0, 0];
+  const pts = team ? null : spawnPoints(S.roster.length);
+  S.roster.forEach((r, i) => {
+    const mine = r.owner === NET.myPid, f = new Fighter(r.id, r.name, mine, r.ch);
+    f.owner = r.owner;
+    if (team) { f.team = r.team; f.slot = slots[r.team]++; placeAtSpawn(f, f.slot); }
+    else { const sp = pts[i] || [rand(-90, 90), rand(-90, 90)]; f.pos.set(sp[0], terrainH(sp[0], sp[1]), sp[1]); f.pos.y = groundAt(f.pos.x, f.pos.z, f.pos.y + 0.3, 0.2); f.yaw = Math.atan2(f.pos.x, f.pos.z); }
+    if (!mine) {
+      f.model = buildChar(f.ch); G.scene.add(f.model.root); if (team) addTeamRing(f.model, f.team);
+      if (NET.role === 'host') { if (r.owner) f.remote = true; else { f.brain = new Brain(f); f.brain.lastPos.copy(f.pos); if (team) f.brain.prefer *= 0.8; } }
+    }
+    G.fighters.push(f);
+  });
+  G.player = G.fighters.find(f => f.isPlayer);
+}
+function netTakeInput(f) {
+  const I = NET.inputs.get(f.id);
+  if (!I) return { on: true, fz: 0, fx: 0, y: f.yaw, p: f.pitch };
+  const out = Object.assign({}, I);
+  NET.inputs.set(f.id, Object.assign(I, { j: false, sl: false, m0: false, q: false, e: false, r: false, eu: false }));
+  return out;
+}
+function netSurvivalEnd(winner) {
+  if (G.over) return;
+  netEv({ k: 'end', win: winner ? winner.id : -1 });
+  if (winner) winner.place = 1;
+  endGame(!!winner && winner.isPlayer);
+}
+function netBackToRoom() {
+  NET.setup = null;
+  if (NET.role === 'host') { NET.lobby.started = false; lobbyChanged(); }
+  showScreen('room'); roomUI();
+}
+
+/* ---------- host: events + snapshots ---------- */
+function netEv(e) { if (NET.role === 'host' && !NET.replaying) NET.events.push(e); }
+const r2 = (v) => Math.round(v * 100) / 100, r3 = (v) => Math.round(v * 1000) / 1000;
+function serArg(a) { if (a instanceof THREE.Vector3) return { v: [r3(a.x), r3(a.y), r3(a.z)] }; if (a && a.def && a.pos) return { f: a.id }; return a; }
+function deArg(a) { if (a && a.v) return new V3(a.v[0], a.v[1], a.v[2]); if (a && a.f != null) return G.fighters.find(f => f.id === a.f); return a; }
+// replicate discrete skill activations so every screen plays the same effects
+const NET_WRAP = ['tryDash', 'tryUlt', 'throwOrb', 'jayVoid', 'jayStab', 'jayTele', 'hydroQ', 'hydroR', 'hydroLeap', 'hydroSplash'];
+for (const name of NET_WRAP) {
+  const orig = window[name]; if (typeof orig !== 'function') continue;
+  window[name] = function (f, ...args) {
+    if (NET.role === 'host' && !NET.replaying && !NET.depth && f && f.def) {
+      const pre = { pos: [r3(f.pos.x), r3(f.pos.y), r3(f.pos.z)], y: r3(f.yaw), p: r3(f.pitch) };
+      const aim = aimDir(f, new V3());
+      NET.depth = 1; let r; try { r = orig.call(this, f, ...args); } finally { NET.depth = 0; }
+      if (r !== false) netEv({ k: 'ab', fn: name, id: f.id, a: args.map(serArg), pos: pre.pos, y: pre.y, p: pre.p, aim: [r3(aim.x), r3(aim.y), r3(aim.z)] });
+      return r;
+    }
+    return orig.call(this, f, ...args);
+  };
+}
+function fighterSnap(f) {
+  const a = (f.isPlayer || f.remote || !f.brain) ? f.forward(new V3()) : f.brain.aimDir(new V3());
+  return [f.id, r2(f.pos.x), r2(f.pos.y), r2(f.pos.z), r3(f.yaw), r3(f.pitch), r2(f.vel.x), r2(f.vel.z), r2(f.vy), Math.round(f.hp * 10) / 10, f.alive ? 1 : 0,
+    (f.onGround ? 1 : 0) | (f.crouch ? 2 : 0) | (f.firing ? 4 : 0) | (f.eHold ? 8 : 0) | (f.leaping ? 16 : 0) | (f.hyBoost ? 32 : 0) | (f.regen ? 64 : 0),
+    r2(f.slide), r2(f.dash), r2(f.rT), r2(f.qT), r2(f.aimT), r2(f.slowT), r2(f.cd.q), r2(f.cd.e), r2(f.cd.r), r2(f.atkCd),
+    f.kills, Math.round(f.dmgDealt), Math.round(f.dmgTaken || 0), Math.round(f.bestHit || 0), f.deaths || 0, f.place || 0, r2(f.respawnT || 0),
+    r3(a.x), r3(a.y), r3(a.z), r2(f.eye), r2(f.flash)];
+}
+function netTick(dt) {
+  if (NET.role === 'host') {
+    if (NET.waiting) { NET.waitT -= dt; const need = NET.lobby.players.filter(p => p.pid !== 'H').every(p => NET.ready.has(p.pid)); if (need || NET.waitT <= 0) NET.waiting = false; }
+    NET.snapT -= dt; if (NET.snapT > 0) return; NET.snapT = 1 / 20;
+    const z = G.zone;
+    const S = { t: r2(G.time), st: G.started ? 1 : 0, cd: r2(G.countdown), z: [r2(z.cx), r2(z.cz), r2(z.r), r2(z.tx), r2(z.tz), r2(z.tr), z.state === 'shrink' ? 1 : 0, z.phase, r2(z.t)],
+      sc: G.score ? G.score.slice() : null, rd: G.round || 0, ro: G.roundOver ? 1 : 0, pk: G.pickups.map(p => p.active ? 1 : 0).join(''),
+      fl: CTF.flags.map(fl => [fl.state, r2(fl.pos.x), r2(fl.pos.y), r2(fl.pos.z), fl.carrier ? fl.carrier.id : -1, r2(fl.dropT)]),
+      F: G.fighters.map(fighterSnap) };
+    const E = NET.events; NET.events = [];
+    NET.tr.all({ t: 'snap', S, E });
+  } else if (NET.role === 'client') {
+    NET.inT -= dt; if (NET.inT > 0) return; NET.inT = 1 / 30;
+    const p = G.player, P = NET.pend;
+    NET.tr.send(Object.assign({ t: 'in', on: G.started && !G.over, fz: (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0), fx: (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0), c: !!keys.KeyC, m: mouseL, y: r3(p.yaw), p: r3(p.pitch) }, P));
+    NET.pend = {};
+  }
+}
+
+/* ---------- client: local frame, snapshot apply, events ---------- */
+function netClientLocal(p, dt) {
+  // collect one-shot presses for the next upload
+  const P = NET.pend;
+  if (pressed.Space) P.j = true; if (pressed.ShiftLeft || pressed.ShiftRight) P.sl = true; if (pressed.Mouse0) P.m0 = true;
+  if (pressed.KeyQ) P.q = true; if (pressed.KeyE) P.e = true; if (pressed.KeyR) P.r = true; if (pressed.up_KeyE) P.eu = true;
+  if (p.alive) {
+    // own attack is played locally right away (the host decides the damage)
+    if (!p.flag && G.started && !G.over) p.firing = mouseL && !p.eHold; else p.firing = false;
+    tickFighter(p, dt);
+    const eyeT = p.slide > 0 ? 0.62 : p.crouch ? 0.78 : 0.98; p.eye = damp(p.eye, eyeT, 14, dt);
+  }
+  // smooth everyone (including me) toward the latest authoritative positions
+  const k = 1 - Math.exp(-18 * dt);
+  for (const f of G.fighters) {
+    if (!f.netPos) continue;
+    if (f.pos.distanceTo(f.netPos) > 6) f.pos.copy(f.netPos); else f.pos.lerp(f.netPos, k);
+    if (!f.isPlayer) { f.yaw += angDiff(f.yaw, f.netYaw) * k; f.pitch += (f.netPitch - f.pitch) * k; }
+  }
+}
+function netApplySnap(S) {
+  if (state !== 'game' || !G.fighters.length) return;
+  const me = G.player, prevAlive = me.alive, prevStarted = G.started;
+  G.started = !!S.st; if (!G.started) G.countdown = S.cd;
+  if (prevStarted !== G.started && G.started) { $('countdown').hidden = true; }
+  const z = G.zone; [z.cx, z.cz, z.r, z.tx, z.tz, z.tr] = S.z; z.state = S.z[6] ? 'shrink' : 'wait'; z.phase = S.z[7]; z.t = S.z[8]; z.dps = ZONE_PHASES[Math.min(z.phase, ZONE_PHASES.length - 1)].dps;
+  if (S.pk) G.pickups.forEach((pk, i) => { const a = S.pk[i] === '1'; pk.active = a; pk.mesh.visible = a; });
+  for (const a of S.F) {
+    const f = G.fighters.find(x => x.id === a[0]); if (!f) continue;
+    if (!f.netPos) f.netPos = new V3(a[1], a[2], a[3]); else f.netPos.set(a[1], a[2], a[3]);
+    f.netYaw = a[4]; f.netPitch = a[5]; f.vel.x = a[6]; f.vel.z = a[7]; f.vy = a[8]; f.hp = a[9];
+    const wasAlive = f.alive; f.alive = !!a[10];
+    if (!wasAlive && f.alive) { f.pos.copy(f.netPos); f.deadT = 0; if (f.model) { f.model.root.visible = true; } if (f.isPlayer) { UI.announce('부활!', '', 1.2); Sfx.play('go', 0.7); } }
+    const b = a[11]; f.onGround = !!(b & 1); f.crouch = !!(b & 2); if (!f.isPlayer) f.firing = !!(b & 4); f.eHold = !!(b & 8); f.leaping = !!(b & 16); f.hyBoost = !!(b & 32); f.regen = !!(b & 64);
+    f.slide = a[12]; f.dash = a[13]; f.rT = a[14]; f.qT = a[15]; if (!f.isPlayer) f.aimT = a[16]; f.slowT = a[17];
+    f.cd.q = a[18]; f.cd.e = a[19]; f.cd.r = a[20]; if (!f.isPlayer) f.atkCd = a[21];
+    f.kills = a[22]; f.dmgDealt = a[23]; f.dmgTaken = a[24]; f.bestHit = a[25]; f.deaths = a[26]; f.place = a[27]; f.respawnT = a[28];
+    if (!f.netAim) f.netAim = new V3(); f.netAim.set(a[29], a[30], a[31]); if (!f.isPlayer) f.eye = a[32]; f.flash = Math.max(f.flash, a[33]);
+    if (wasAlive && !f.alive) { f.deadT = 0; f.firing = false; }
+  }
+  // flags
+  if (S.fl && CTF.flags.length) {
+    for (const f of G.fighters) f.flag = null;
+    S.fl.forEach((a, i) => { const fl = CTF.flags[i]; if (!fl) return; const prev = fl.state; fl.state = a[0]; fl.dropT = a[5];
+      fl.carrier = a[4] >= 0 ? G.fighters.find(x => x.id === a[4]) : null; if (fl.carrier) fl.carrier.flag = fl; else fl.pos.set(a[1], a[2], a[3]);
+      if (prev !== fl.state) netFlagAnnounce(fl, prev); });
+  }
+  // round / score changes (team modes) — announce from this player's point of view
+  if (S.sc) {
+    const old = G.score || [0, 0]; G.score = S.sc; G.roundOver = !!S.ro;
+    for (const t of [0, 1]) if (S.sc[t] > old[t] && NET.prevMeta) { const mine = t === me.team; UI.announce(mine ? '라운드 승리' : '라운드 패배', `${TEAM_NAME[0]} ${S.sc[0]} : ${S.sc[1]} ${TEAM_NAME[1]}`, 3); Sfx.play(mine ? 'kill' : 'deny', 0.9); }
+    if (NET.prevMeta && S.rd > (G.round || 0)) { clearCombatFX(); $('countdown').hidden = false; G.lastCount = 4; UI.announce(`라운드 ${S.rd}`, `${TEAM_NAME[0]} ${S.sc[0]} : ${S.sc[1]} ${TEAM_NAME[1]}`, 2.4); }
+    G.round = S.rd;
+  }
+  NET.prevMeta = true;
+  if (prevAlive && !me.alive) { me.firing = false; G.specIdx = 0; }
+}
+function netFlagAnnounce(fl, prev) {
+  const me = G.player, c = fl.carrier;
+  if (fl.state === 'carried' && c) {
+    const mine = c.team === me.team;
+    UI.announce(mine ? '깃발 확보!' : '깃발을 빼앗겼어요!', `${c.isPlayer ? '내가' : c.name + (mine ? '(아군)' : '(적)') + '이(가)'} ${flagLabel(fl)}을 들었어요`, 2.2);
+    G.sparks.burst(c.chest(new V3()), 30, TEAM_COL[fl.team], 5, 0.6, 0.25, -2); Sfx.play(mine ? 'pickup' : 'deny', 0.9);
+  } else if (fl.state === 'home' && prev === 'dropped') { UI.announce('', `${flagLabel(fl)}이 진영으로 돌아갔어요`, 1.6); G.sparks.burst(fl.home.clone().add(new V3(0, 1.2, 0)), 24, TEAM_COL[fl.team], 4, 0.6, 0.2, -2); }
+}
+function netApplyEvent(e) {
+  if (state !== 'game') return;
+  const F = (id) => G.fighters.find(f => f.id === id), me = G.player;
+  if (e.k === 'ab') {
+    const f = F(e.id); if (!f) return;
+    if (f.netPos) { f.pos.set(e.pos[0], e.pos[1], e.pos[2]); f.netPos.copy(f.pos); }
+    if (!f.isPlayer) { f.yaw = e.y; f.pitch = e.p; } else { /* keep my own view; aim comes from the event */ }
+    if (!f.netAim) f.netAim = new V3(); f.netAim.set(e.aim[0], e.aim[1], e.aim[2]);
+    // allow the cosmetic replay to pass the usual gates
+    f.alive = true; f.onGround = true; f.cd.q = f.cd.e = f.cd.r = 0; f.stabHitT = 0; f.tele = null; f.dash = 0; const fl = f.flag; f.flag = null;
+    const savedYaw = f.yaw, savedPitch = f.pitch;
+    if (f.isPlayer) { f.yaw = e.y; f.pitch = e.p; }
+    NET.replaying = true; NET.depth = 1; try { window[e.fn](f, ...e.a.map(deArg)); } catch (err) { console.warn(err); } NET.replaying = false; NET.depth = 0;
+    if (f.isPlayer) { f.yaw = savedYaw; f.pitch = savedPitch; }
+    f.flag = fl;
+  } else if (e.k === 'kill') {
+    const v = F(e.v), s = e.s >= 0 ? F(e.s) : null; if (!v) return;
+    v.alive = false; v.hp = 0; v.deadT = 0; v.firing = false; v.rT = 0; v.qT = 0; v.tele = null; v.eHold = false;
+    UI.killfeed(s, v, e.c);
+    if (s && s.isPlayer && s !== v) { UI.hitmarker(true); Sfx.play('kill'); UI.announce('처치!', v.name + ' 탈락'); }
+    G.sparks.burst(v.chest(new V3()), 30, 0xfff3a8, 6, 0.6, 0.35, 4);
+    if (v.isPlayer) { G.deathBy = e.c === 'storm' ? null : s; G.deathCause = e.c; G.specIdx = 0; }
+  } else if (e.k === 'dmg') {
+    const t = F(e.t), s = e.s >= 0 ? F(e.s) : null; if (!t) return;
+    t.flash = 0.12;
+    if (s && s.isPlayer && t !== s) { UI.damageNumber(t, e.a, e.b); UI.hitmarker(false); t.showHpT = 4; Sfx.play('hit', 0.8); }
+    if (t.isPlayer) UI.hurt(s, e.a);
+  } else if (e.k === 'pk') {
+    const f = F(e.id); if (f && f.isPlayer) { Sfx.play('pickup'); UI.announce('', '물통 · 체력 +60', 1.2); }
+  } else if (e.k === 'end') {
+    if (G.over) return;
+    if (isTeam()) { const win = e.team === me.team; G.score = e.score; G.teamResult = { win, team: e.team, why: `${TEAM_NAME[e.team]}이 ${e.score[0]} : ${e.score[1]}로 이겼어요` }; endGame(win); }
+    else { const w = F(e.win); if (w) w.place = 1; endGame(!!w && w.isPlayer); }
+  }
+}
+
+/* ---------- deterministic world: every player must build identical maps ---------- */
+{
+  const orig = buildWorld;
+  buildWorld = function (scene, id) {
+    const R = Math.random, seed = mulberry(7700 + [...(id || MAP_ID)].reduce((a, c) => a + c.charCodeAt(0), 0));
+    Math.random = seed;
+    try { return orig(scene, id); } finally { Math.random = R; }
+  };
+}
+/* =========================================================
    Menus, HUD, input, main loop
    ========================================================= */
 const $ = (id) => document.getElementById(id);
@@ -5801,6 +6429,10 @@ const UI = {
     else st = '마지막 원';
     if (this._st !== st) { $('hudStormTxt').innerHTML = st; this._st = st; $('hudStorm').classList.toggle('warn', z.state === 'shrink'); }
     if (isTeam()) this.teamHUD(p, dt);
+    else if (NET.role !== 'off') {
+      const dead = !p.alive && !G.over; $('specUI').hidden = !dead; $('specTint').classList.toggle('on', dead); cv.classList.toggle('dead', dead);
+      if (dead) { const tg = G.specTarget; $('spTitle').textContent = '탈락했어요'; $('spCount').hidden = true; $('spSub').textContent = tg ? `관전 중 · ${tg.name} (${tg.def.name}) · 클릭해서 바꾸기` : '관전 중'; }
+    }
     // crosshair
     const ch = $('crosshair');
     if (p.alive) {
@@ -5981,8 +6613,29 @@ function updateShowroom(dt) {
   S.ring.material.opacity = 0.45 + Math.sin(S.t * 2) * 0.15;
   S.bolts.update(dt, S.cam); S.sparks.update(dt);
 }
+/* ---------- browser save (localStorage): picks + career record ---------- */
+const SAVE_KEY = 'dom-save-v1';
+const Save = {
+  d: { name: '', ch: 'volter', mode: 'survival', map: 'canyon', rec: { games: 0, wins: 0, kills: 0, dmg: 0, best: 0, byMode: {} } },
+  load() {
+    try { const raw = localStorage.getItem(SAVE_KEY); if (raw) { const o = JSON.parse(raw); Object.assign(this.d, o); this.d.rec = Object.assign({ games: 0, wins: 0, kills: 0, dmg: 0, best: 0, byMode: {} }, o.rec || {}); } } catch (e) { }
+    if (!this.d.name) { this.d.name = '플레이어' + Math.floor(1000 + Math.random() * 9000); this.write(); }
+    if (!CHARS[this.d.ch]) this.d.ch = 'volter';
+    if (!MODES[this.d.mode]) this.d.mode = 'survival';
+    if (!MAPS[this.d.map] || !(MAPS[this.d.map].modes || []).includes(this.d.mode)) this.d.map = Object.keys(MAPS).find(k => (MAPS[k].modes || []).includes(this.d.mode)) || 'canyon';
+    return this.d;
+  },
+  write() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(this.d)); } catch (e) { } },
+  set(k, v) { this.d[k] = v; this.write(); },
+  record(p, win) {
+    const r = this.d.rec, bm = r.byMode[G.mode] || (r.byMode[G.mode] = { games: 0, wins: 0 });
+    r.games++; bm.games++; if (win) { r.wins++; bm.wins++; }
+    r.kills += p.kills || 0; r.dmg += Math.round(p.dmgDealt || 0); r.best = Math.max(r.best, Math.round(p.bestHit || 0));
+    this.write();
+  }
+};
 function setShowChar(ch) {
-  selChar = ch; if (!show) return;
+  selChar = ch; Save.set('ch', ch); if (!show) return;
   show.scene.remove(show.model.root); show.model = buildChar(ch); show.scene.add(show.model.root); show.ch = ch;
   show.ring.material.color.setHex(CHARS[ch].ring); show.rim.color.setHex(CHARS[ch].rim); show.fireT = 0.8;
   UI.dossier(ch);
@@ -6131,7 +6784,7 @@ function applyMapLook() {
 const MAP_SW = { canyon: 'linear-gradient(135deg,#e2a35e,#b6532f)', harbor: 'linear-gradient(135deg,#3f86b0,#c23b2e 70%,#2f6fb5)', harborS: 'linear-gradient(135deg,#3f86b0,#4d9bff 50%,#ff4f5e)', jungle: 'linear-gradient(135deg,#5d7b39,#8f8a78 60%,#3f6b2c)' };
 const MAP_TAG = { canyon: '사막 · 마을', harbor: '컨테이너 · 부두', harborS: '3 대 3 · 축소판', jungle: '3 대 3 · 사원 미로' };
 function setMode(id) {
-  selMode = id;
+  selMode = id; Save.set('mode', id);
   $('mdSurvival').classList.toggle('on', id === 'survival'); $('mdTeam').classList.toggle('on', !!MODES[id].team);
   $('teamModes').hidden = !MODES[id].team;
   $('mdCTF').classList.toggle('on', id === 'ctf'); $('mdTSV').classList.toggle('on', id === 'tsv');
@@ -6162,7 +6815,7 @@ function loadMap(id, cb) {
   $('loadingTxt').textContent = `${name}${c >= 0 && c % 28 !== 0 ? '을' : '를'} 짓는 중`; $('loading').hidden = false;
   setTimeout(() => {
     for (const pk of G.pickups) scene.remove(pk.mesh); G.pickups = [];
-    buildWorld(scene, id); applyMapLook(); UI.buildMinimapBg(); mapCardUI();
+    buildWorld(scene, id); Save.set('map', id); applyMapLook(); UI.buildMinimapBg(); mapCardUI();
     $('loading').hidden = true; if (cb) cb();
   }, 60);
 }
@@ -6170,7 +6823,10 @@ function selectMap(id) { if (mapLoading) return; if (id === MAP_ID) { mapCardUI(
 
 /* ---------- screens ---------- */
 function showScreen(name) {
-  for (const id of ['scrTitle', 'scrMode', 'scrChar', 'scrMap', 'scrPause', 'scrResult']) $(id).hidden = true;
+  for (const id of ['scrTitle', 'scrMode', 'scrChar', 'scrMap', 'scrPause', 'scrResult', 'scrRoom']) $(id).hidden = true;
+  $('profileChip').hidden = name !== 'title';
+  if (name === 'room') $('scrRoom').hidden = false;
+  if (name === 'title') profileUI();
   $('hud').hidden = true;
   state = name;
   if (name === 'title') $('scrTitle').hidden = false;
@@ -6196,6 +6852,21 @@ function updateViewOffset() {
 function wire() {
   const click = (id, fn) => $(id).addEventListener('click', () => { Sfx.init(); Sfx.play('ui'); fn(); });
   click('btnPlay', () => showScreen('mode'));
+  click('btnHost', () => netHost());
+  click('btnJoin', () => { $('joinInput').value = ''; $('joinErr').textContent = ''; $('joinModal').hidden = false; setTimeout(() => $('joinInput').focus(), 30); });
+  click('joinCancel', () => { $('joinModal').hidden = true; });
+  click('joinGo', () => netJoin($('joinInput').value.trim()));
+  $('joinInput').addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 6); });
+  $('joinInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') netJoin($('joinInput').value.trim()); if (e.key === 'Escape') $('joinModal').hidden = true; });
+  click('profileChip', () => openNameModal());
+  click('nameCancel', () => { $('nameModal').hidden = true; });
+  click('nameSave', () => saveName());
+  $('nameInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') saveName(); if (e.key === 'Escape') $('nameModal').hidden = true; });
+  click('roomBack', () => { netLeave(); showScreen('title'); });
+  click('roomCopy', () => { try { navigator.clipboard.writeText(NET.code); UI.notice('코드를 복사했어요', 1.4); } catch (e) { } });
+  click('roomStart', () => netStartClicked());
+  click('aiMinus', () => { if (NET.role === 'host') { NET.lobby.ai--; lobbyChanged(); } });
+  click('aiPlus', () => { if (NET.role === 'host') { NET.lobby.ai++; lobbyChanged(); } });
   click('btnChars', () => showScreen('char'));
   click('modeBack', () => showScreen('title'));
   click('mdSurvival', () => setMode('survival'));
@@ -6212,8 +6883,8 @@ function wire() {
   click('mapGo', () => startGame());
 
   click('btnResume', () => resume());
-  click('btnQuit', () => { G.over = true; exitLock(); clearMatch(); showScreen('title'); });
-  click('btnResNext', () => { endResult(); clearMatch(); mapFrom = 'result'; enterMapScreen(); });
+  click('btnQuit', () => { G.over = true; exitLock(); clearMatch(); if (NET.role !== 'off') netLeave('나갔어요'); showScreen('title'); });
+  click('btnResNext', () => { endResult(); clearMatch(); if (NET.role !== 'off') { netBackToRoom(); return; } mapFrom = 'result'; enterMapScreen(); });
   // showroom drag
   cv.addEventListener('pointerdown', (e) => {
     if (state === 'char') { show.drag = { x: e.clientX, yaw: show.yaw }; cv.setPointerCapture(e.pointerId); }
@@ -6286,6 +6957,8 @@ function startGame() {
   G.mode = selMode;
   if (isTeam()) { startTeamGame(); return; }
   $('teamBar').hidden = true; $('tbAlive').hidden = $('tbKills').hidden = false; $('playerCard').classList.remove('blue', 'red');
+  if (NET.setup) netCreateFighters(false);
+  else {
   const pts = spawnPoints(12).sort(() => Math.random() - 0.5);
   const names = AI_NAMES.slice().sort(() => Math.random() - 0.5);
   const aiChars = []; for (let i = 0; i < 11; i++) aiChars.push(CHAR_IDS[i % 3]); aiChars.sort(() => Math.random() - 0.5);
@@ -6298,6 +6971,7 @@ function startGame() {
     G.fighters.push(f);
   }
   G.player = G.fighters[0];
+  }
   G.vm = { volter: G.vmV, jay: G.vmJ, hydro: G.vmH }[G.player.ch]; G.vmV.root.visible = G.vm === G.vmV; G.vmJ.root.visible = G.vm === G.vmJ; G.vmH.root.visible = G.vm === G.vmH;
   UI.tiles(G.player.ch); $('hudName').textContent = G.player.def.name; $('hpMax').textContent = ' / ' + G.player.maxHp;
   if (PORTRAIT[G.player.ch]) $('hudPic').style.backgroundImage = `url(${PORTRAIT[G.player.ch]})`;
@@ -6306,7 +6980,7 @@ function startGame() {
   for (const k in keys) keys[k] = false; mouseL = false;
   UI.reset(); showScreen('game'); paused = false;
   $('countdown').hidden = false;
-  cv.focus(); requestLock();
+  cv.focus(); if (NET.role === 'client') pause(); else requestLock();
 }
 function addTeamRing(m, team) {
   const r = new THREE.Mesh(new THREE.RingGeometry(0.62, 0.78, 32).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: TEAM_COL[team], transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false }));
@@ -6316,6 +6990,8 @@ function addTeamRing(m, team) {
 function startTeamGame() {
   if (!World.bases) { console.warn('team mode on a non-team map'); }
   buildNav();
+  if (NET.setup) netCreateFighters(true);
+  else {
   const names = AI_NAMES.slice().sort(() => Math.random() - 0.5);
   const chars = CHAR_IDS.concat(CHAR_IDS).sort(() => Math.random() - 0.5);
   const roster = [[0, true], [0, false], [0, false], [1, false], [1, false], [1, false]];
@@ -6328,6 +7004,7 @@ function startTeamGame() {
     G.fighters.push(f);
   });
   G.player = G.fighters[0];
+  }
   teamAssignRoles();
   G.vm = { volter: G.vmV, jay: G.vmJ, hydro: G.vmH }[G.player.ch]; G.vmV.root.visible = G.vm === G.vmV; G.vmJ.root.visible = G.vm === G.vmJ; G.vmH.root.visible = G.vm === G.vmH;
   UI.tiles(G.player.ch); $('hudName').textContent = G.player.def.name; $('hpMax').textContent = ' / ' + G.player.maxHp;
@@ -6342,7 +7019,7 @@ function startTeamGame() {
   UI.reset(); showScreen('game'); paused = false;
   $('countdown').hidden = false;
   UI.announce(MODES[G.mode].name, G.mode === 'ctf' ? '3판 2선승 · 적 깃발을 우리 진영까지 가져오세요' : '3판 2선승 · 상대 팀을 모두 쓰러뜨리세요', 2.6);
-  cv.focus(); requestLock();
+  cv.focus(); if (NET.role === 'client') pause(); else requestLock();
 }
 /* ---------- result scene: the player's agent alone in the map ---------- */
 const RESULT_SPOT = { canyon: [-26, -2, -1.2], harbor: [-4, 44, Math.PI + 0.3], harborS: [-8, -12, Math.PI + 0.3], jungle: [-40, 0, -1.57] };   // x, z, yaw (facing the camera)
@@ -6397,7 +7074,7 @@ function endGame(win) {
       $('resTitle').textContent = R.win ? '우리 팀 승리!' : '우리 팀 패배';
       $('resSub').textContent = R.why || '';
     } else {
-    $('resRank').innerHTML = `#${p.place || 1}<small> / 12</small>`; $('resRank').classList.toggle('win', win);
+    $('resRank').innerHTML = `#${p.place || 1}<small> / ${G.fighters.length}</small>`; $('resRank').classList.toggle('win', win);
     $('resEyebrow').textContent = win ? '승리' : '탈락';
     $('resTitle').textContent = win ? '최후의 생존자' : (p.place <= 3 ? '아깝게 탈락했어요' : '탈락했어요');
     $('resSub').textContent = win ? `${curMap().name}에서 마지막까지 살아남았어요.` : (k && k !== p ? `${k.name}의 ${k.def.weapon}에 쓰러졌어요.` : G.deathCause === 'sea' ? '바다에 빠졌어요' : `${curMap().storm}에 휩쓸렸어요.`);
@@ -6408,7 +7085,12 @@ function endGame(win) {
     const s = Math.floor(isTeam() || !p.alive ? (isTeam() ? G.endTime : (p.deathT || G.endTime)) : G.endTime); $('resTime').textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
     $('resTimeL').textContent = isTeam() ? '경기 시간' : '생존 시간';
     $('resChar').textContent = p.def.name; $('resMode').textContent = MODES[G.mode].name; $('resMap').textContent = curMap().name;
-    if (state === 'game' && G.over) startResult(p, win);
+    if (state === 'game' && G.over) {
+      const W = isTeam() ? !!(G.teamResult && G.teamResult.win) : win;
+      Save.record(p, W); const r = Save.d.rec, bm = r.byMode[G.mode];
+      $('resCareer').textContent = `${MODES[G.mode].name} ${bm.games}전 ${bm.wins}승 · 전체 ${r.games}전 ${r.wins}승`;
+      startResult(p, win);
+    }
     if (win) Sfx.play('kill');
   }, win ? 1200 : 1800);
   if (win) UI.announce(isTeam() ? '승리!' : '최후의 생존자', '', 3); else if (isTeam()) UI.announce('패배', '', 3);
@@ -6417,57 +7099,70 @@ function endGame(win) {
 /* ---------- per-frame game update ---------- */
 const _fw = new V3(), _rt = new V3(), _tmp = new V3();
 let smokeT = 0, aimPts = [];
+// one input frame → movement, skills and attack for any human-driven fighter (local or remote)
+function localInput(p) {
+  const on = G.started && !G.over;
+  return { on, fz: on ? (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0) : 0, fx: on ? (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0) : 0, c: !!keys.KeyC,
+    sl: !!(pressed.ShiftLeft || pressed.ShiftRight), j: !!pressed.Space, m: mouseL, m0: !!pressed.Mouse0,
+    q: !!pressed.KeyQ, e: !!pressed.KeyE, r: !!pressed.KeyR, eu: !!pressed.up_KeyE, y: p.yaw, p: p.pitch };
+}
+function controlFighter(p, I, dt) {
+  let wx = 0, wz = 0, jump = false;
+  if (!p.isPlayer) { p.yaw = I.y; p.pitch = I.p; }
+  if (!I.m) p.mouseBlock = false;
+  if (G.started && !G.over && I.on !== false) {
+    const sy = Math.sin(p.yaw), cy = Math.cos(p.yaw);
+    wx = -sy * I.fz + cy * I.fx; wz = -cy * I.fz - sy * I.fx; const l = Math.hypot(wx, wz); if (l > 0) { wx /= l; wz /= l; }
+    p.crouch = !!I.c && p.slide <= 0;
+    if (I.sl) { if (!startSlide(p, wx, wz)) startSlide(p, -sy, -cy); }
+    if (I.j) jump = true;
+    if (G.mode === 'ctf' && I.m0) { if (p.flag) { ctfDrop(p); p.mouseBlock = true; if (p.isPlayer) Sfx.play('ui', 0.6); } else if (ctfTryPick(p)) p.mouseBlock = true; }
+    if (p.flag) p.mouseBlock = true;
+    const fire = I.m && !p.mouseBlock;
+    if (p.ch === 'hydro') {
+      if (I.q) hydroQ(p);
+      if (I.r) hydroR(p);
+      if (I.e && p.cd.e <= 0 && !p.flag) { p.eHold = true; if (p.isPlayer) Sfx.play('charge', 0.5); }
+      if (I.eu && p.eHold) hydroLeap(p, hydroLeapTarget(p, new V3()));
+      p.firing = fire && !p.eHold;
+    } else if (p.ch === 'jay') {
+      if (I.q) jayVoid(p);
+      if (I.e) jayStab(p);
+      if (I.r) jayTele(p);
+      p.firing = fire;
+    } else {
+      if (I.q) tryDash(p);
+      if (I.r) tryUlt(p);
+      if (I.e && p.cd.e <= 0) { p.eHold = true; if (p.isPlayer) Sfx.play('charge', 0.8); }
+      if (I.eu && p.eHold) throwOrb(p, throwVelFor(p));
+      p.firing = fire && !p.eHold;
+    }
+  } else p.firing = false;
+  tickFighter(p, dt);
+  physics(p, wx, wz, jump, dt);
+  const eyeT = p.slide > 0 ? 0.62 : p.crouch ? 0.78 : 0.98; p.eye = damp(p.eye, eyeT, 14, dt);
+}
 function updateGame(dt) {
   const p = G.player;
   G.time += dt;
   if (!G.started) {
-    G.countdown -= dt; const n = Math.ceil(G.countdown);
+    if (!(NET.role === 'host' && NET.waiting)) G.countdown -= dt; const n = Math.ceil(G.countdown);
     if (n !== G.lastCount && n > 0) { G.lastCount = n; $('countdown').textContent = n; Sfx.play('tick'); }
     if (G.countdown <= 0) { G.started = true; $('countdown').hidden = true; UI.announce('시작!', isTeam() ? (G.mode === 'ctf' ? '적 진영의 깃발을 노리세요' : `라운드 ${G.round}`) : `${stormJ('이')} 오기 전에 자리를 잡으세요`, 2); Sfx.play('go'); }
   }
   // ---- player input ----
-  if (p.alive) {
-    let wx = 0, wz = 0, jump = false;
-    if (G.started && !G.over) {
-      const fz = (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0), fx = (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0);
-      const sy = Math.sin(p.yaw), cy = Math.cos(p.yaw);
-      wx = -sy * fz + cy * fx; wz = -cy * fz - sy * fx; const l = Math.hypot(wx, wz); if (l > 0) { wx /= l; wz /= l; }
-      p.crouch = !!keys.KeyC && p.slide <= 0;
-      if (pressed.ShiftLeft || pressed.ShiftRight) { if (!startSlide(p, wx, wz)) startSlide(p, -sy, -cy); }
-      if (pressed.Space) jump = true;
-      if (G.mode === 'ctf' && pressed.Mouse0) { if (p.flag) { ctfDrop(p); mouseL = false; Sfx.play('ui', 0.6); } else if (ctfTryPick(p)) mouseL = false; }
-      if (p.flag) mouseL = false;
-      if (p.ch === 'hydro') {
-        if (pressed.KeyQ) hydroQ(p);
-        if (pressed.KeyR) hydroR(p);
-        if (pressed.KeyE && p.cd.e <= 0 && !p.flag) { p.eHold = true; Sfx.play('charge', 0.5); }
-        if (pressed.up_KeyE && p.eHold) hydroLeap(p, hydroLeapTarget(p, new V3()));
-        p.firing = mouseL && !p.eHold;
-      } else if (p.ch === 'jay') {
-        if (pressed.KeyQ) jayVoid(p);
-        if (pressed.KeyE) jayStab(p);
-        if (pressed.KeyR) jayTele(p);
-        p.firing = mouseL;
-      } else {
-        if (pressed.KeyQ) tryDash(p);
-        if (pressed.KeyR) tryUlt(p);
-        if (pressed.KeyE && p.cd.e <= 0) { p.eHold = true; Sfx.play('charge', 0.8); }
-        if (pressed.up_KeyE && p.eHold) { throwOrb(p, playerThrowVel(new V3())); }
-        p.firing = mouseL && !p.eHold;
-      }
-    } else p.firing = false;
-    tickFighter(p, dt);
-    physics(p, wx, wz, jump, dt);
-    const eyeT = p.slide > 0 ? 0.62 : p.crouch ? 0.78 : 0.98; p.eye = damp(p.eye, eyeT, 14, dt);
-  }
+  if (NET.role === 'client') netClientLocal(p, dt);
+  else if (p.alive) controlFighter(p, localInput(p), dt);
   if (p.alive) for (const k in pressed) delete pressed[k];
   // ---- AI ----
   for (const f of G.fighters) {
     if (f.isPlayer) continue;
-    if (f.alive) { tickFighter(f, dt); if (G.started) updateAI(f, dt); else physics(f, 0, 0, false, dt); }
+    if (NET.role === 'client' && f.alive) tickFighter(f, dt);
+    else if (f.alive && f.remote && !f.brain) controlFighter(f, netTakeInput(f), dt);
+    else if (f.alive) { tickFighter(f, dt); if (G.started) updateAI(f, dt); else physics(f, 0, 0, false, dt); }
     else { f.deadT += dt; if (f.deadT > 7) f.model.root.position.y -= dt * 0.4; if (f.deadT > 11) f.model.root.visible = false; }
   }
-  if (!p.alive) { p.deadT += dt; if (isTeam() && pressed.Mouse0) G.specIdx = (G.specIdx || 0) + 1; }
+  if (!p.alive) { p.deadT += dt; if ((isTeam() || NET.role !== 'off') && pressed.Mouse0) G.specIdx = (G.specIdx || 0) + 1; }
   // ---- orbs ----
   for (let i = G.orbs.length - 1; i >= 0; i--) {
     const o = G.orbs[i]; o.t += dt; let landed = null;
@@ -6503,8 +7198,10 @@ function updateGame(dt) {
     if (fl.t <= 0) { G.scene.remove(fl.mesh); fl.mesh.geometry.dispose(); G.fields.splice(i, 1); }
   }
   updateJayFX(dt); updateShots(dt);
-  if (isTeam()) { teamUpdate(dt); for (const k in pressed) delete pressed[k]; }
-  else if (G.started) zoneUpdate(G.zone, dt); else zoneUpdate(G.zone, 0);
+  if (isTeam()) { if (NET.role === 'client') { if (G.mode === 'ctf') ctfUpdate(dt); } else teamUpdate(dt); }
+  else if (G.started && NET.role !== 'client') zoneUpdate(G.zone, dt); else zoneUpdate(G.zone, 0);
+  for (const k in pressed) delete pressed[k];
+  if (NET.role !== 'off') netTick(dt);
   if (isTeam()) G.zone.wall.visible = false;
   // ---- models ----
   for (const f of G.fighters) {
@@ -6544,9 +7241,9 @@ function updateCamera(dt) {
     UI.shake = Math.max(0, (UI.shake || 0) - dt * 1.6);
     if (UI.shake > 0) { const k = UI.shake * UI.shake; camera.position.x += rand(-1, 1) * k * 0.5; camera.position.y += rand(-1, 1) * k * 0.5; camera.rotation.x += rand(-1, 1) * k * 0.05; }
     const roll = p.slide > 0 ? 0.06 : 0; camera.rotation.z = damp(G._roll || 0, roll, 10, dt); G._roll = camera.rotation.z;
-  } else if (isTeam() && p.deadT > 1.6) {
+  } else if ((isTeam() || NET.role !== 'off') && p.deadT > 1.6) {
     // spectate a living teammate from behind
-    const mates = G.fighters.filter(f => f.alive && f.team === p.team && f !== p);
+    const mates = G.fighters.filter(f => f.alive && f !== p && (!isTeam() || f.team === p.team));
     const tg = mates.length ? mates[(G.specIdx || 0) % mates.length] : null; G.specTarget = tg;
     const cam = G._specCam || (G._specCam = { p: new V3(), l: new V3(), init: false });
     let want, look;
@@ -6629,7 +7326,7 @@ function frame(now) {
     followSun(camera.position); sky.position.copy(camera.position); renderer.render(scene, camera);
     return;
   }
-  if (state === 'title' || state === 'mode') {
+  if (state === 'title' || state === 'mode' || state === 'room') {
     titleCam(dt);
     G.time += dt; updateAmbient(dt); G.dust.update(dt); G.sparks.update(dt);
     followSun(camera.position);
@@ -6649,7 +7346,7 @@ function frame(now) {
     return;
   }
   if (state === 'game') {
-    if (!paused) { updateGame(dt); }
+    if (!paused || NET.role !== 'off') { updateGame(dt); }
     updateCamera(paused ? 0 : dt);
     G.bolts.update(paused ? 0 : dt, camera); G.flash.update(paused ? 0 : dt);
     Sfx.lyaw = G.player.yaw; Sfx.loop('beam', !paused && !G.over && G.player.alive && G.player.firing && G.player.rT > 0, 0.32);
@@ -6700,9 +7397,10 @@ function boot() {
   G.vmV = buildViewmodel(); G.vmJ = buildJayViewmodel(); G.vmH = buildHydroViewmodel(); vmScene.add(G.vmV.root, G.vmJ.root, G.vmH.root); G.vmFlag = makeVMFlag(); vmScene.add(G.vmFlag); G.vmJ.root.visible = false; G.vmH.root.visible = false; G.vm = G.vmV;
   UI.init(); wire();
   requestAnimationFrame(frame);
+  { const S = Save.load(); selChar = S.ch; selMode = S.mode; MAP_ID = S.map; }
   setTimeout(() => {
     buildWorld(scene, MAP_ID); applyMapLook();
-    show = buildShowroom();
+    show = buildShowroom(); setShowChar(selChar); setMode(selMode);
     onResize();
     capturePortrait();
     UI.buildMinimapBg(); mapCardUI();
