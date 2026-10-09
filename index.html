@@ -4041,7 +4041,7 @@ MAPS.canyon.modes = MAPS.harbor.modes = ['survival']; MAPS.harborS.modes = MAPS.
    ========================================================= */
 const VOLTER = {
   hp: 200, speed: 7.0,
-  basic: { range: 34, dmg: 25, interval: 0.5, slow: 1.0, pad: 0.55 },
+  basic: { range: 27, dmg: 25, interval: 0.5, slow: 1.0, pad: 0.55 },
   q: { cd: 5, time: 0.2, speed: 37, dmg: 22 },
   e: { cd: 10, radius: 6.5, dur: 5, dps: 22, speed: 23 },
   r: { cd: 40, dur: 7, speedMul: 1.45, tick: 0.07, tickDmg: 10, range: 21 }
@@ -4657,7 +4657,7 @@ const JAY = {
   basic: { range: 17, dmg: 32, interval: 0.7, speed: 32, hw: 2.7 },
   q: { cd: 8, dur: 5, mul: 1.8 },
   e: { cd: 1.5, range: 6.5, cos: 0.17, dmg: 72, anim: 0.44, hitAt: 0.15 },
-  r: { cd: 50, delay: 1.0, range: 40, cos: 0.965, dmg: 45 }
+  r: { cd: 50, delay: 1.0, range: 40, cos: 0.965, dmg: 60 }
 };
 const CHARS = {
   volter: { id: 'volter', name: '볼터', en: 'VOLTER', role: '딜러', hp: VOLTER.hp, speed: VOLTER.speed, weapon: '번개', accent: '#ffd23f', ring: 0xffd84a, rim: 0xffd36a,
@@ -5413,10 +5413,10 @@ function teamAssignRoles() {
    ========================================================= */
 const HYDRO = {
   hp: 160, speed: 6.8,
-  basic: { range: 400, dmg: 50, boost: 100, interval: 1.2, speed: 190, slow: 3, pad: 0.6 },
+  basic: { range: 400, dmg: 65, near: 15, nearDmg: 30, boost: 100, interval: 1.2, speed: 190, slow: 3, pad: 0.6 },
   q: { cd: 4.5, range: 17, speed: 40, r: 1.35, dmg: 45, kb: 15 },
   e: { cd: 7, range: 24, min: 8, splashR: 4.8, kb: 12 },
-  r: { cd: 80, range: 400, speed: 78, r: 5.1, dmg: 150, kb: 10 }
+  r: { cd: 80, range: 400, speed: 78, r: 5.1, dmg: 125, kb: 10 }
 };
 CHARS.hydro = { id: 'hydro', name: '하이드로', en: 'HYDRO', role: '저격수', hp: HYDRO.hp, speed: HYDRO.speed, weapon: '물총', accent: '#5fe0ff', ring: 0x4fd8ff, rim: 0x7fe6ff,
   stats: [['체력', 2, '160'], ['이동속도', 3, '보통'], ['사거리', 5, '초장거리']] };
@@ -5519,7 +5519,9 @@ function updateShots(dt) {
       const end = S.pos.clone().addScaledVector(S.dir, Math.min(best, len));
       G.bolts.spawn(S.pos.clone(), end, { life: 0.12, width: S.boost ? 0.07 : 0.035, jag: 0.0, branch: 0, color: S.boost ? 0xffffff : 0x8fe8ff });
       if (hitF) {
-        damage(hitF, S.dmg, S.owner, { slow: HYDRO.basic.slow, big: S.boost });
+        // point-blank shots are weak: the bolt needs some travel to hit hard (empowered shot excluded)
+        const dmg = !S.boost && S.dist + best < HYDRO.basic.near ? HYDRO.basic.nearDmg : S.dmg;
+        damage(hitF, dmg, S.owner, { slow: HYDRO.basic.slow, big: S.boost });
         waterSplash(end, S.boost ? 1.4 : 0.8); Sfx.at('hsplash', end, 0.8); S.dead = true;
       } else if (best < len) { waterSplash(end, 0.6); Sfx.at('hsplash', end, 0.5); S.dead = true; }
       S.pos.copy(end); S.dist += len;
@@ -5863,7 +5865,7 @@ function saveName() {
   if (v.length < 2) { $('nameErr').textContent = '2자 이상 입력해 주세요.'; return; }
   if (v.length > 12) { $('nameErr').textContent = '12자까지 쓸 수 있어요.'; return; }
   Save.set('name', v); $('nameModal').hidden = true; profileUI();
-  if (NET.role === 'client') NET.tr.send({ t: 'me', name: v, ch: selChar });
+  if (NET.role === 'client') NET.tr && NET.tr.send({ t: 'me', name: v, ch: selChar });
   if (NET.role === 'host') { const me = NET.lobby.players.find(p => p.pid === 'H'); if (me) me.name = v; lobbyChanged(); }
 }
 
@@ -5883,18 +5885,18 @@ function lobbyFix(L) {
 }
 function lobbyChanged() {
   if (NET.role !== 'host') return;
-  lobbyFix(NET.lobby); NET.tr.all({ t: 'lobby', L: NET.lobby }); roomUI();
+  lobbyFix(NET.lobby); NET.tr && NET.tr.all({ t: 'lobby', L: NET.lobby }); roomUI();
 }
 function hostMsg(pid, m) {
   const L = NET.lobby;
   if (m.t === 'hello') {
-    if (L.started || L.players.length >= NET_MAX[L.mode]) { NET.tr.send(pid, { t: 'deny', why: L.started ? 'started' : 'full' }); return; }
+    if (L.started || L.players.length >= NET_MAX[L.mode]) { NET.tr && NET.tr.send(pid, { t: 'deny', why: L.started ? 'started' : 'full' }); return; }
     if (!L.players.some(p => p.pid === pid)) {
       const t0 = L.players.filter(p => p.team === 0).length, t1 = L.players.filter(p => p.team === 1).length;
       L.players.push({ pid, name: String(m.name || '플레이어').slice(0, 12), ch: CHARS[m.ch] ? m.ch : 'volter', team: t0 <= t1 ? 0 : 1 });
       if (L.ai > NET_MAX[L.mode] - L.players.length) L.ai--;
     }
-    NET.tr.send(pid, { t: 'welcome', pid }); lobbyChanged();
+    NET.tr && NET.tr.send(pid, { t: 'welcome', pid }); lobbyChanged();
     UI.notice && UI.notice(`${m.name}님이 들어왔어요`, 2);
   } else if (m.t === 'me') {
     const p = L.players.find(p => p.pid === pid); if (p) { if (m.name) p.name = String(m.name).slice(0, 12); if (CHARS[m.ch]) p.ch = m.ch; lobbyChanged(); }
@@ -5987,7 +5989,7 @@ function roomUI() {
   seg('rsMode', Object.values(MODES).map(m => [m.id, m.name]), L.mode, (k) => { L.mode = k; L.ai = MODES[k].team ? Math.max(0, 6 - L.players.length) : Math.max(0, 12 - L.players.length); lobbyChanged(); });
   seg('rsMap', Object.keys(MAPS).filter(k => (MAPS[k].modes || []).includes(L.mode)).map(k => [k, MAPS[k].name]), L.map, (k) => { L.map = k; lobbyChanged(); });
   const mine = L.players.find(p => p.pid === me);
-  seg('rsChar', CHAR_IDS.map(c => [c, CHARS[c].name]), mine ? mine.ch : selChar, (c) => { setShowChar(c); if (host) { const p = L.players.find(q => q.pid === 'H'); p.ch = c; lobbyChanged(); } else { NET.tr.send({ t: 'me', ch: c }); } });
+  seg('rsChar', CHAR_IDS.map(c => [c, CHARS[c].name]), mine ? mine.ch : selChar, (c) => { setShowChar(c); if (host) { const p = L.players.find(q => q.pid === 'H'); p.ch = c; lobbyChanged(); } else { NET.tr && NET.tr.send({ t: 'me', ch: c }); } });
   const maxAI = Math.max(0, NET_MAX[L.mode] - L.players.length);
   $('aiNum').textContent = L.ai; $('aiMax').textContent = `최대 ${maxAI}`;
   $('aiMinus').disabled = !host || L.ai <= 0; $('aiPlus').disabled = !host || L.ai >= maxAI;
@@ -6014,7 +6016,7 @@ function netStartClicked() {
     for (let k = 0; k < L.ai; k++) roster.push({ id: id++, name: names.pop() || 'AI ' + k, ch: CHAR_IDS[Math.floor(Math.random() * 3)], team: null, owner: null });
   }
   const S = { mode: L.mode, map: L.map, roster };
-  L.started = true; NET.tr.all({ t: 'lobby', L }); NET.tr.all({ t: 'start', S });
+  L.started = true; NET.tr && NET.tr.all({ t: 'lobby', L }); NET.tr && NET.tr.all({ t: 'start', S });
   netBeginMatch(S);
 }
 function netBeginMatch(S) {
@@ -6023,7 +6025,7 @@ function netBeginMatch(S) {
   const go = () => {
     if (NET.role === 'host') { NET.waiting = NET.lobby.players.length > 1; NET.ready.clear(); NET.waitT = 15; }
     startGame();
-    if (NET.role === 'client') NET.tr.send({ t: 'ready' });
+    if (NET.role === 'client') NET.tr && NET.tr.send({ t: 'ready' });
   };
   if (MAP_ID !== S.map) loadMap(S.map, go); else go();
 }
@@ -6101,11 +6103,11 @@ function netTick(dt) {
       fl: CTF.flags.map(fl => [fl.state, r2(fl.pos.x), r2(fl.pos.y), r2(fl.pos.z), fl.carrier ? fl.carrier.id : -1, r2(fl.dropT)]),
       F: G.fighters.map(fighterSnap) };
     const E = NET.events; NET.events = [];
-    NET.tr.all({ t: 'snap', S, E });
+    NET.tr && NET.tr.all({ t: 'snap', S, E });
   } else if (NET.role === 'client') {
     NET.inT -= dt; if (NET.inT > 0) return; NET.inT = 1 / 30;
     const p = G.player, P = NET.pend;
-    NET.tr.send(Object.assign({ t: 'in', on: G.started && !G.over, fz: (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0), fx: (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0), c: !!keys.KeyC, m: mouseL, y: r3(p.yaw), p: r3(p.pitch) }, P));
+    NET.tr && NET.tr.send(Object.assign({ t: 'in', on: G.started && !G.over, fz: (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0), fx: (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0), c: !!keys.KeyC, m: mouseL, y: r3(p.yaw), p: r3(p.pitch) }, P));
     NET.pend = {};
   }
 }
